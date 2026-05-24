@@ -217,10 +217,10 @@ export default function TechStack() {
                   // Calculate circular position (arc shifted even further right)
                   const total = backendExtras.length;
                   // Arc only the rightmost 120 degrees (from -60deg to +60deg)
-                  const arcSpan = (6 * Math.PI) / 3; // 120deg in radians
+                  const arcSpan = (6 * Math.PI) / 3.3; // 120deg in radians
                   const startAngle = -arcSpan / 2; // -60deg
                   const angle = startAngle + (idx / (total - 1)) * arcSpan;
-                  const radius = 110;
+                  const radius = 120;
                   const xPos = Math.cos(angle) * radius + 80; // Shift arc further right
                   const yPos = Math.sin(angle) * radius;
 

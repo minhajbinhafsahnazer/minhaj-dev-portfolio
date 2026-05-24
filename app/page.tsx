@@ -128,7 +128,7 @@ export default function Home() {
                   </a>
                 ))}
                 <a
-                  href="/resume.pdf"
+                  href="/MINHAJ.pdf"
                   download
                   className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 hover:border-blue-400/40 transition-all"
                 >
