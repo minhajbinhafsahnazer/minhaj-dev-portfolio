@@ -959,6 +959,25 @@ class App {
       antialias: false,
       alpha: true
     });
+
+    // Safeguard for environments where getContextAttributes() returns null
+    const originalGetContext = this.renderer.getContext.bind(this.renderer);
+    this.renderer.getContext = () => {
+      const ctx = originalGetContext();
+      if (ctx) {
+        const originalGetContextAttributes = ctx.getContextAttributes;
+        if (typeof originalGetContextAttributes === 'function') {
+          ctx.getContextAttributes = () => {
+            const attrs = originalGetContextAttributes.call(ctx);
+            return attrs || { alpha: true };
+          };
+        } else {
+          ctx.getContextAttributes = () => ({ alpha: true });
+        }
+      }
+      return ctx;
+    };
+
     this.renderer.setSize(initW, initH, false);
     this.renderer.setPixelRatio(window.devicePixelRatio);
 

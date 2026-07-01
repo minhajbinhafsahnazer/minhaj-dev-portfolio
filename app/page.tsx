@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import AboutSection from './components/sections/AboutSection';
 import FeaturedWork from './components/sections/FeaturedWork';
 import ExperienceTimeline from './components/sections/ExperienceTimeline';
@@ -11,15 +11,31 @@ import SkillsSection from './components/sections/SkillsSection';
 import GlassCard from './components/ui/GlassCard';
 import ThemeToggle from './components/ui/ThemeToggle';
 
+const useSafeLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [introPhase, setIntroPhase] = useState<'playing' | 'exiting' | 'done'>('playing');
 
+  // Prevent flash by setting done state synchronously on mount if already played
+  useSafeLayoutEffect(() => {
+    const hasPlayed = sessionStorage.getItem('introPlayed');
+    if (hasPlayed === 'true') {
+      setIntroPhase('done');
+    }
+  }, []);
+
   useEffect(() => {
+    if (sessionStorage.getItem('introPlayed') === 'true') {
+      return;
+    }
     // Phase 1: play intro for 2.2s, then start exit
     const exitTimer = setTimeout(() => setIntroPhase('exiting'), 2200);
     // Phase 2: remove overlay after exit animation (0.8s)
-    const doneTimer = setTimeout(() => setIntroPhase('done'), 3000);
+    const doneTimer = setTimeout(() => {
+      setIntroPhase('done');
+      sessionStorage.setItem('introPlayed', 'true');
+    }, 3000);
     return () => { clearTimeout(exitTimer); clearTimeout(doneTimer); };
   }, []);
 

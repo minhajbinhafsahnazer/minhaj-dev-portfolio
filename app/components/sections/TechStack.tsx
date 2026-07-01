@@ -7,10 +7,10 @@ import RevealOnScroll from '../ui/RevealOnScroll';
 import LogoLoop, { LogoItem } from '../ui/LogoLoop';
 import Masonry, { MasonryItem } from '../ui/Masonry';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, 
-  SiNodedotjs, SiPython, SiPostgresql, SiDocker, 
-  SiFramer, SiThreedotjs, SiGit, SiVercel 
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
+  SiNodedotjs, SiPython, SiPostgresql, SiDocker,
+  SiFramer, SiThreedotjs, SiGit, SiVercel
 } from 'react-icons/si';
 
 const backendExtras = [
@@ -28,6 +28,21 @@ const backendExtras = [
   { name: 'UI/UX', delay: 0.55 },
 
 
+];
+
+const cloudExtras = [
+  { name: 'EC2', delay: 0 },
+  { name: 'ECS', delay: 0.05 },
+  { name: 'S3', delay: 0.1 },
+  { name: 'SES', delay: 0.15 },
+  { name: 'Lightsail', delay: 0.2 },
+  { name: 'Amplify', delay: 0.25 },
+  { name: 'CloudWatch', delay: 0.3 },
+  { name: 'R2', delay: 0.35 },
+  { name: 'VPC', delay: 0.4 },
+  { name: 'IAM', delay: 0.45 },
+  { name: 'ECR', delay: 0.5 },
+  { name: 'Cognito', delay: 0.55 },
 ];
 
 export default function TechStack() {
@@ -76,38 +91,56 @@ export default function TechStack() {
   const expertItems: MasonryItem[] = [
     {
       id: "1",
+      category: "Case Study • Full Stack",
+      title: "Control Center Platform",
+      description: "Centralized tenant configuration | RBAC user invitation flows | Unified system audit logging | Onboarding wizard workflows",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
+      url: "/case-studies/control-center-platform",
       height: 400,
     },
     {
       id: "2",
+      category: "Case Study • Backend Systems",
+      title: "Designing Scalable REST APIs",
+      description: "Asynchronous FastAPI endpoints | Optimized SQLAlchemy schemas | Redis latency reduction caching | Scalable DB connection pools",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
-      height: 250,
+      url: "/case-studies/designing-scalable-apis",
+      height: 280,
     },
     {
       id: "3",
+      category: "Case Study • DevOps & Cloud",
+      title: "AWS Deployment & DevOps Journey",
+      description: "AWS ECS/Fargate container hosting | GitHub Actions CI/CD pipelines | Cloudflare CDN edge caching | Secure Secrets Manager configurations",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
-      height: 600,
+      url: "/case-studies/aws-deployment",
+      height: 550,
     },
     {
       id: "4",
+      category: "Case Study • Artificial Intelligence",
+      title: "Context-Aware Agentic Conversational AI",
+      description: "LLM embeddings & vector search | Compliance question answering | Autonomous action triggering | Dynamic agent routing logic",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
-      height: 350,
+      url: "/case-studies/agentic-ai",
+      height: 320,
     },
     {
       id: "5",
+      category: "Case Study • Artificial Intelligence",
+      title: "Integrating AI into Business Applications",
+      description: "Prompt engineering & structured outputs | Resilient retry logic & error handling | Token caching & cost optimization | Model performance evaluation",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
-      height: 500,
+      url: "/case-studies/ai-integration",
+      height: 480,
     },
     {
       id: "6",
+      category: "Case Study • DevOps & Cloud",
+      title: "Automated CI/CD & AWS Deployment",
+      description: "Multi-region cloud infrastructure | Infrastructure as Code (Terraform) | Container orchestration & scaling | Automated unit testing pipelines",
       img: "/images/masonry/dark1.jpg",
-      url: "#",
+      url: "/case-studies/ci-cd-pipeline",
       height: 300,
     },
   ];
@@ -129,12 +162,12 @@ export default function TechStack() {
 
       {/* Technical Expertise Cards */}
       <div className="flex flex-col gap-8 max-w-6xl mx-auto">
-        
+
         {/* Frontend Focus */}
         <RevealOnScroll delay={0}>
           <GlassCard variant="subtle" className="p-8 md:p-10 group border-zinc-300/50 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-500 relative overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-10" hover spotlight>
             <div className="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-blue-500/[0.04] blur-[80px] group-hover:bg-blue-500/[0.08] transition-all duration-1000" />
-            
+
             <div className="relative flex-1 transition-transform duration-500 group-hover:translate-x-1">
               <div className="mb-2 flex items-center gap-3">
                 <span className="h-[1px] w-8 bg-blue-500/30"></span>
@@ -148,16 +181,16 @@ export default function TechStack() {
 
             <div className="relative flex flex-wrap gap-x-8 gap-y-6 lg:max-w-2xl">
               {technologyGroups.frontend.map((group, idx) => (
-                <div 
-                  key={group.label} 
+                <div
+                  key={group.label}
                   className="space-y-3 transition-all duration-500 group-hover:translate-y-[-2px]"
                   style={{ transitionDelay: `${idx * 40}ms` }}
                 >
                   <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500">{group.label}</h5>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
-                      <span 
-                        key={item} 
+                      <span
+                        key={item}
                         className="px-3 py-1.5 rounded-full text-[10px] font-medium border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-[1.04] hover:bg-blue-500/5 hover:border-blue-500/20 hover:text-blue-600 dark:hover:text-blue-400"
                       >
                         {item}
@@ -174,7 +207,7 @@ export default function TechStack() {
         <RevealOnScroll delay={0.1}>
           <GlassCard variant="subtle" className="p-8 md:p-10 group border-zinc-300/50 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-500 relative overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-10" hover spotlight>
             <div className="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-purple-500/[0.04] blur-[80px] group-hover:bg-purple-500/[0.08] transition-all duration-1000" />
-            
+
             {/* Subtle Gradient Sweep Effect */}
             <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-purple-500/[0.03] to-transparent skew-x-12 pointer-events-none" />
 
@@ -190,16 +223,16 @@ export default function TechStack() {
 
             <div className="relative flex flex-wrap gap-x-8 gap-y-6 lg:max-w-2xl">
               {technologyGroups.backend.map((group, idx) => (
-                <div 
-                  key={group.label} 
+                <div
+                  key={group.label}
                   className="space-y-3 transition-all duration-500 group-hover:translate-y-[-2px]"
                   style={{ transitionDelay: `${idx * 40}ms` }}
                 >
                   <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500">{group.label}</h5>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
-                      <span 
-                        key={item} 
+                      <span
+                        key={item}
                         className="px-3 py-1.5 rounded-full text-[10px] font-medium border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-[1.04] hover:bg-purple-500/5 hover:border-purple-500/20 hover:text-purple-600 dark:hover:text-purple-400"
                       >
                         {item}
@@ -211,17 +244,15 @@ export default function TechStack() {
             </div>
 
             {/* Refined Hover Extras: Circular Skill Pills */}
-            <div className="absolute right-[-240px] top-1/2 -translate-y-1/2 pointer-events-none flex items-center pr-0 overflow-visible h-full">
-              <div className="relative h-64 w-32 flex items-center justify-end">
+            <div className="absolute right-40 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:flex items-center justify-center h-full z-10">
+              <div className="relative w-0 h-0 flex items-center justify-center">
                 {backendExtras.map((skill, idx) => {
-                  // Calculate circular position (arc shifted even further right)
                   const total = backendExtras.length;
-                  // Arc only the rightmost 120 degrees (from -60deg to +60deg)
-                  const arcSpan = (6 * Math.PI) / 3.3; // 120deg in radians
-                  const startAngle = -arcSpan / 2; // -60deg
-                  const angle = startAngle + (idx / (total - 1)) * arcSpan;
-                  const radius = 120;
-                  const xPos = Math.cos(angle) * radius + 80; // Shift arc further right
+                  const arcSpan = 2 * Math.PI; // 360 degrees (full circle)
+                  const startAngle = -Math.PI / 2; // Start from top
+                  const angle = startAngle + (idx / total) * arcSpan;
+                  const radius = 115;
+                  const xPos = Math.cos(angle) * radius; 
                   const yPos = Math.sin(angle) * radius;
 
                   if (!mounted) return null;
@@ -230,14 +261,14 @@ export default function TechStack() {
                     <div
                       key={skill.name}
                       className="absolute opacity-0 scale-[0.8] group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                      style={{ 
+                      style={{
                         transitionDelay: `${100 + skill.delay * 1000}ms`,
                         right: '0px',
-                        top: '50%',
-                        transform: `translate(${xPos}px, calc(-50% + ${yPos}px))`
+                        top: '0px',
+                        transform: `translate(calc(50% + ${xPos}px), calc(-50% + ${yPos}px))`
                       }}
                     >
-                      <div 
+                      <div
                         className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-md flex items-center justify-center shadow-lg border-t-white/20"
                       >
                         <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-tighter text-zinc-300">
@@ -256,7 +287,7 @@ export default function TechStack() {
         <RevealOnScroll delay={0.2}>
           <GlassCard variant="subtle" className="p-8 md:p-10 group border-zinc-300/50 dark:border-white/10 bg-white/70 dark:bg-zinc-900/60 shadow-md hover:-translate-y-1 hover:shadow-xl transition-all duration-500 relative overflow-hidden flex flex-col lg:flex-row lg:items-center justify-between gap-10" hover spotlight>
             <div className="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-emerald-500/[0.04] blur-[80px] group-hover:bg-emerald-500/[0.08] transition-all duration-1000" />
-            
+
             <div className="relative flex-1 transition-transform duration-500 group-hover:translate-x-1">
               <div className="mb-2 flex items-center gap-3">
                 <span className="h-[1px] w-8 bg-emerald-500/30"></span>
@@ -269,16 +300,16 @@ export default function TechStack() {
 
             <div className="relative flex flex-wrap gap-x-8 gap-y-6 lg:max-w-2xl">
               {technologyGroups.cloud.map((group, idx) => (
-                <div 
-                  key={group.label} 
+                <div
+                  key={group.label}
                   className="space-y-3 transition-all duration-500 group-hover:translate-y-[-2px]"
                   style={{ transitionDelay: `${idx * 40}ms` }}
                 >
                   <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-500">{group.label}</h5>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
-                      <span 
-                        key={item} 
+                      <span
+                        key={item}
                         className="px-3 py-1.5 rounded-full text-[10px] font-medium border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] shadow-sm backdrop-blur-sm transition-all duration-300 hover:scale-[1.04] hover:bg-emerald-500/5 hover:border-emerald-500/20 hover:text-emerald-600 dark:hover:text-emerald-400"
                       >
                         {item}
@@ -288,6 +319,47 @@ export default function TechStack() {
                 </div>
               ))}
             </div>
+
+            {/* Subtle Gradient Sweep Effect */}
+            <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-emerald-500/[0.03] to-transparent skew-x-12 pointer-events-none" />
+
+            {/* Circular Skill Pills */}
+            <div className="absolute right-40 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:flex items-center justify-center h-full z-10">
+              <div className="relative w-0 h-0 flex items-center justify-center">
+                {cloudExtras.map((skill, idx) => {
+                  const total = cloudExtras.length;
+                  const arcSpan = 2 * Math.PI; // 360 degrees (full circle)
+                  const startAngle = -Math.PI / 2; // Start from top
+                  const angle = startAngle + (idx / total) * arcSpan;
+                  const radius = 115;
+                  const xPos = Math.cos(angle) * radius; 
+                  const yPos = Math.sin(angle) * radius;
+
+                  if (!mounted) return null;
+
+                  return (
+                    <div
+                      key={skill.name}
+                      className="absolute opacity-0 scale-[0.8] group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      style={{
+                        transitionDelay: `${100 + skill.delay * 1000}ms`,
+                        right: '0px',
+                        top: '0px',
+                        transform: `translate(calc(50% + ${xPos}px), calc(-50% + ${yPos}px))`
+                      }}
+                    >
+                      <div
+                        className="h-10 w-10 md:h-12 md:w-12 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-md flex items-center justify-center shadow-lg border-t-white/20"
+                      >
+                        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-tighter text-zinc-300">
+                          {skill.name}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </GlassCard>
         </RevealOnScroll>
       </div>
@@ -296,7 +368,7 @@ export default function TechStack() {
       <RevealOnScroll delay={0.4}>
         <div className="mt-20 py-10 border-y border-white/[0.03] relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-          
+
           <div className="mb-8 flex justify-center">
             <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-600 group-hover:text-zinc-400 transition-colors duration-500">
               Technology Ecosystem
@@ -322,7 +394,7 @@ export default function TechStack() {
 
       {/* Expertise Masonry Section */}
       <RevealOnScroll delay={0.5}>
-        <div className="mt-20">
+        <div id="case-studies" className="mt-20">
           <div className="mb-12 text-center">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-2 dark:text-zinc-600">
               Deep Expertise

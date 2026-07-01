@@ -108,15 +108,27 @@ export default function AboutSection() {
             {[
               { value: '2+', label: 'Years Experience' },
               { value: '4+', label: 'Projects Delivered' },
-              { value: '100%', label: 'Client Satisfaction' },
-            ].map((stat, i) => (
-              <RevealOnScroll key={stat.label} delay={0.2 + i * 0.1} direction="right">
-                <div className="p-6 rounded-xl border border-white/5 bg-black/40 backdrop-blur-md flex flex-col justify-center hover:border-white/10 transition-all duration-500 group">
+              { value: 'LinkedIn', label: 'Connect on LinkedIn', href: 'https://www.linkedin.com/in/minhajpk' },
+            ].map((stat, i) => {
+              const content = (
+                <div className="p-6 rounded-xl border border-white/5 bg-black/40 backdrop-blur-md flex flex-col justify-center hover:border-white/10 transition-all duration-500 group h-full">
                   <div className="font-serif-display text-3xl font-light text-white group-hover:text-blue-400 transition-colors duration-500">{stat.value}</div>
                   <div className="text-[10px] uppercase tracking-[0.15em] text-zinc-500 font-medium mt-1">{stat.label}</div>
                 </div>
-              </RevealOnScroll>
-            ))}
+              );
+
+              return (
+                <RevealOnScroll key={stat.label} delay={0.2 + i * 0.1} direction="right">
+                  {stat.href ? (
+                    <a href={stat.href} target="_blank" rel="noopener noreferrer" className="block h-full cursor-pointer">
+                      {content}
+                    </a>
+                  ) : (
+                    content
+                  )}
+                </RevealOnScroll>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ interface MagneticButtonProps {
   strength?: number;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  suppressHydrationWarning?: boolean;
 }
 
 export default function MagneticButton({
@@ -29,6 +30,7 @@ export default function MagneticButton({
   strength = 0.3,
   type,
   disabled,
+  suppressHydrationWarning,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -68,6 +70,7 @@ export default function MagneticButton({
         className={className}
         type={as === 'button' ? type : undefined}
         disabled={as === 'button' ? disabled : undefined}
+        suppressHydrationWarning={suppressHydrationWarning}
       >
         {children}
       </Tag>

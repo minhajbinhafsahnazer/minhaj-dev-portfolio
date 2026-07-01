@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { getProjects } from '@/lib/services/portfolio.service';
 import { projects as fallbackProjects } from '@/lib/data';
 import Section from '../ui/Section';
@@ -47,20 +48,43 @@ export default function FeaturedWork() {
           <RevealOnScroll key={project.id} delay={index * 0.15} direction={index % 2 === 0 ? 'left' : 'right'} className="h-full">
             <GlassCard 
               variant="subtle"
-              className="overflow-hidden group border-zinc-200 dark:border-white/5 glass-card-hover flex flex-col h-full"
+              className="overflow-hidden group border-zinc-200 dark:border-white/5 glass-card-hover flex flex-col h-full cursor-pointer"
               hover
             >
+              {/* Card Click Overlay */}
+              {(project.liveUrl || project.githubUrl) && (
+                <a 
+                  href={project.liveUrl || project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10 cursor-pointer"
+                  aria-label={`View details of project ${project.title}`}
+                />
+              )}
+
               {/* Project Image/Gradient */}
               <div className="h-52 w-full relative overflow-hidden bg-zinc-900/50 shrink-0">
-                <div className={`
-                  absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700
-                  ${index % 3 === 0 ? 'bg-gradient-to-br from-blue-500 to-purple-500/30' : ''}
-                  ${index % 3 === 1 ? 'bg-gradient-to-br from-purple-500 to-pink-500/30' : ''}
-                  ${index % 3 === 2 ? 'bg-gradient-to-br from-emerald-500 to-cyan-500/30' : ''}
-                `} />
-                <div className="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-medium">Project Preview</span>
-                </div>
+                {project.imageUrl ? (
+                  <Image
+                    src={project.imageUrl}
+                    alt={`${project.title} preview`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                ) : (
+                  <>
+                    <div className={`
+                      absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700
+                      ${index % 3 === 0 ? 'bg-gradient-to-br from-blue-500 to-purple-500/30' : ''}
+                      ${index % 3 === 1 ? 'bg-gradient-to-br from-purple-500 to-pink-500/30' : ''}
+                      ${index % 3 === 2 ? 'bg-gradient-to-br from-emerald-500 to-cyan-500/30' : ''}
+                    `} />
+                    <div className="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-medium">Project Preview</span>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Project Content */}
@@ -94,7 +118,7 @@ export default function FeaturedWork() {
                       href={project.liveUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-[10px] font-semibold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-2px] after:left-0 after:h-[1px] after:w-0 after:bg-zinc-900 dark:after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+                      className="text-[10px] font-semibold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300 relative z-20 after:absolute after:bottom-[-2px] after:left-0 after:h-[1px] after:w-0 after:bg-zinc-900 dark:after:bg-white after:transition-all after:duration-300 group-hover:after:w-full"
                     >
                       View Project
                     </a>
@@ -104,7 +128,7 @@ export default function FeaturedWork() {
                       href={project.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="group/link flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-zinc-300 transition-colors duration-300"
+                      className="group/link flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-zinc-300 transition-colors duration-300 relative z-20"
                     >
                       GitHub 
                       <span className="group-hover/link:translate-x-1 transition-transform duration-300">&rarr;</span>

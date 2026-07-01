@@ -87,7 +87,7 @@ export default function GlassCard({
           } as any}
         />
       )}
-      <div className="relative z-10">
+      <div className="relative z-10 h-full flex flex-col flex-grow">
         {children}
       </div>
     </div>

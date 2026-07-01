@@ -82,12 +82,33 @@ export default function ContactSection() {
 
     setStatus('sending');
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setStatus('success');
-      setForm({ name: '', email: '', message: '' });
-      setTouched({});
-      setErrors({});
-    } catch {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('success');
+        setForm({ name: '', email: '', message: '' });
+        setTouched({});
+        setErrors({});
+      } else {
+        console.error("Form submission error:", result);
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
       setStatus('error');
     }
   };
@@ -193,11 +214,12 @@ export default function ContactSection() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="space-y-5">
+              <form onSubmit={handleSubmit} noValidate suppressHydrationWarning className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-[10px] uppercase tracking-[0.15em] text-zinc-500 font-medium">Name</label>
                     <input
+                      suppressHydrationWarning
                       id="name"
                       name="name"
                       type="text"
@@ -214,6 +236,7 @@ export default function ContactSection() {
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-[10px] uppercase tracking-[0.15em] text-zinc-500 font-medium">Email</label>
                     <input
+                      suppressHydrationWarning
                       id="email"
                       name="email"
                       type="email"
@@ -231,6 +254,7 @@ export default function ContactSection() {
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-[10px] uppercase tracking-[0.15em] text-zinc-500 font-medium">Message</label>
                   <textarea
+                    suppressHydrationWarning
                     id="message"
                     name="message"
                     rows={5}
@@ -245,6 +269,7 @@ export default function ContactSection() {
                   )}
                 </div>
                 <MagneticButton
+                  suppressHydrationWarning
                   as="button"
                   type="submit"
                   disabled={status === 'sending'}

@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 
 import './Masonry.css';
@@ -52,6 +55,9 @@ export interface MasonryItem {
   img: string;
   url: string;
   height: number;
+  title?: string;
+  description?: string;
+  category?: string;
 }
 
 interface GridItem extends MasonryItem {
@@ -84,6 +90,7 @@ const Masonry: React.FC<MasonryProps> = ({
   blurToFocus = true,
   colorShiftOnHover = false
 }) => {
+  const router = useRouter();
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
     [5, 4, 3, 2],
@@ -242,35 +249,103 @@ const Masonry: React.FC<MasonryProps> = ({
     return Math.max(...grid.map(item => item.y + item.h));
   }, [grid]);
 
+const getCardStyles = (height: number) => {
+  if (height < 350) {
+    // Short cards (e.g. 280, 300, 320 -> actual height 140px-160px)
+    return {
+      padding: 'p-4',
+      gap: 'gap-2',
+      maxPoints: 2,
+      titleSize: 'text-xs font-semibold',
+      descSize: 'text-[9.5px]',
+    };
+  } else if (height < 450) {
+    // Medium cards (e.g. 400 -> actual height 200px)
+    return {
+      padding: 'p-5',
+      gap: 'gap-3',
+      maxPoints: 3,
+      titleSize: 'text-sm font-medium',
+      descSize: 'text-[10px]',
+    };
+  } else {
+    // Tall cards (e.g. 480, 550 -> actual height 240px-275px)
+    return {
+      padding: 'p-6',
+      gap: 'gap-4',
+      maxPoints: 4,
+      titleSize: 'text-base font-normal',
+      descSize: 'text-[10.5px]',
+    };
+  }
+};
+
   return (
     <div ref={containerRef} className="masonry-list" style={{ height: containerHeight }}>
       {grid.map(item => {
+        const styles = getCardStyles(item.height);
+
         return (
           <div
             key={item.id}
             data-key={item.id}
-            className="masonry-item-wrapper"
-            onClick={() => window.open(item.url, '_blank', 'noopener')}
+            className="masonry-item-wrapper group/flip"
+            onClick={() => {
+              if (item.url && item.url !== '#') {
+                if (item.url.startsWith('/')) {
+                  router.push(item.url);
+                } else {
+                  window.open(item.url, '_blank', 'noopener');
+                }
+              }
+            }}
             onMouseEnter={e => handleMouseEnter(e, item)}
             onMouseLeave={e => handleMouseLeave(e, item)}
           >
-            <div className="masonry-item-img" style={{ backgroundImage: `url(${item.img})` }}>
-              {colorShiftOnHover && (
-                <div
-                  className="color-overlay"
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5))',
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    borderRadius: '8px'
-                  }}
-                />
-              )}
+            <div className="flip-card-inner">
+              
+              {/* Front Side: Case Study Image preview (default state) */}
+              <div 
+                className="flip-card-front bg-zinc-900 border border-zinc-200/80 dark:border-white/10 shadow-sm dark:shadow-md transition-colors duration-300" 
+                style={{ backgroundImage: `url(${item.img})` }}
+              >
+                {/* Visual overlay for image visibility and text contrast */}
+                <div className={`absolute inset-0 bg-black/40 dark:bg-black/60 flex flex-col justify-center ${styles.padding} ${styles.gap} text-left transition-colors duration-300`}>
+                  <div className="text-[9px] uppercase tracking-[0.25em] text-blue-500 dark:text-blue-400 font-bold">
+                    {item.category || "Case Study"}
+                  </div>
+                  <div>
+                    <h4 className={`font-serif-display ${styles.titleSize} text-white leading-tight`}>
+                      {item.title}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Back Side: Glassmorphic Case Study Details (hover state) */}
+              <div className={`flip-card-back bg-zinc-950/90 border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl flex flex-col justify-center ${styles.padding} ${styles.gap} text-left`}>
+                <div className="flex flex-col gap-1.5">
+                  <div className="text-[9px] uppercase tracking-[0.25em] text-blue-400 font-bold">
+                    {item.category || "Case Study"}
+                  </div>
+                  <h4 className={`font-serif-display ${styles.titleSize} tracking-tight text-white leading-tight`}>
+                    {item.title}
+                  </h4>
+                  
+                  {/* Structured highlights list instead of raw paragraph */}
+                  <ul className={`space-y-1 mt-1.5 list-none ${styles.descSize}`}>
+                    {item.description?.split('|').slice(0, styles.maxPoints).map((point, idx) => (
+                      <li key={idx} className="flex items-start gap-1.5 leading-snug text-white font-light">
+                        <span className="text-blue-400 mt-0.5">•</span>
+                        <span>{point.trim()}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+
+              </div>
+
             </div>
           </div>
         );

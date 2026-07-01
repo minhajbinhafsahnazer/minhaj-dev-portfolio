@@ -4,19 +4,21 @@ import { Project, Experience, Technology } from '@/types/portfolio';
 export const projects: Project[] = [
   {
     id: '1',
-    title: 'Plant Pot',
-    description: 'Full-stack e-commerce home decor solution with Django backend, with automated CI/CD pipeline.',
-    technologies: ['Next.js', 'MySQL', 'AWS', 'Django', 'Docker'],
+    title: 'Perslace',
+    description: 'An AI-powered Performance Incentive Management Platform designed to automate complex commission schemes, handle multi-level approval workflows, and deliver real-time performance insights with full audit traceability.',
+    technologies: ['Next.js', 'FastAPI', 'AI Integration', 'Chatbots', 'AWS', 'Docker', 'CI/CD', 'PostgreSQL', 'Redis', 'Real-time Engines', 'Analytics Dashboards', 'CRM Integration', 'Payment Gateway Integration', 'React-ts'],
     category: 'fullstack',
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/yourusername/project',
+    liveUrl: 'https://perslace.com/',
+    imageUrl: '/images/perslace_dashboard.png',
   },
   {
     id: '2',
-    title: 'future project',
+    title: 'Plant Pot',
     description: 'Interactive dashboard with real-time data visualization using Chart.js and WebSocket connections.',
-    technologies: ['Next.js', 'TypeScript', 'Chart.js', 'Django', 'Redis', 'AWS'],
+    technologies: ['Next.js', 'TypeScript', 'Chart.js', 'Django', 'Redis', 'AWS', 'chat bot'],
     category: 'fullstack',
+    imageUrl: '/images/plant_pot.png',
+    liveUrl: '#',
   },
   // Add more projects
 ];
@@ -28,7 +30,7 @@ export const experiences: Experience[] = [
     company: 'Apisride',
     period: '2024 - Present',
     description: 'Leading full-stack development of enterprise applications using Next.js and FastAPI, managing AWS deployments and CI/CD pipelines, Worked on 2 CRM grade EU based projects, developed complex features like AI chatbots, analytics dashboards, and real-time engines.',
-    technologies: ['Next.js', 'React-ts', 'FastAPI', 'AWS', 'Docker', 'CI/CD', 'PostgreSQL', 'Redis', 'CRM Integration', 'Payment Gateway Integration', 'AI Integration', 'chatbots', 'analytics dashboards', 'real-time engines', ],
+    technologies: ['Next.js', 'FastAPI', 'Ai-LLM Integration', 'AI Integration', 'Chatbots', 'AWS', 'Cloudflare', 'Docker', 'CI/CD', 'PostgreSQL', 'Redis', 'Real-time Engines', 'Analytics Dashboards', 'Performance Optimization', 'Security', 'Webhooks', 'CRM Integration', 'Payment Gateway Integration', 'SSO', 'SSH', 'Nginx', 'Hosting and Deployment', 'Unit Tests', 'Monitoring', 'JIRA', 'React-ts'],
     type: 'work',
   },
   {
@@ -37,7 +39,7 @@ export const experiences: Experience[] = [
     company: 'Harwex Technologies',
     period: '2022 - 2024',
     description: 'Worked on Payment Gateway Orchestration System, developed REST APIs and frontend interfaces, implemented authentication systems and database optimization.',
-    technologies: ['React', 'Django', 'PostgreSQL', 'AWS'],
+    technologies: ['React', 'Django', 'PostgreSQL', 'AWS', 'FastAPI', 'Celery', 'Redis', 'Git', 'Docker', 'Bootstrap',  'API Integrations', 'Postman'],
     type: 'work',
   },
   // Add more experiences
