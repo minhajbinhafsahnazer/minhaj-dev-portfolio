@@ -399,10 +399,32 @@ html.light .glass-subtle svg {
   color: #000000 !important;
 }
 
-/* Ensure no translucent text colors survive in light mode */
-html.light [class*="text-white/"], 
-html.light [class*="text-zinc-"] {
+/* Ensure no translucent text colors survive in light mode (excluding intro loader) */
+html.light [class*="text-white/"]:not(.intro-loader-container *), 
+html.light [class*="text-zinc-"]:not(.intro-loader-container *) {
   color: #000000 !important;
+}
+
+/* Preserve IntroLoader dark cinematic aesthetic regardless of theme */
+html.light .intro-loader-container {
+  background-color: #050507 !important;
+  color: #ffffff !important;
+}
+html.light .intro-loader-container .text-white { color: #ffffff !important; }
+html.light .intro-loader-container .text-zinc-300 { color: #d4d4d8 !important; }
+html.light .intro-loader-container .text-zinc-400 { color: #a1a1aa !important; }
+html.light .intro-loader-container .text-zinc-500 { color: #71717a !important; }
+html.light .intro-loader-container .text-zinc-600 { color: #52525b !important; }
+html.light .intro-loader-container .text-blue-400 { color: #60a5fa !important; }
+html.light .intro-loader-container p,
+html.light .intro-loader-container h1,
+html.light .intro-loader-container span,
+html.light .intro-loader-container div,
+html.light .intro-loader-container button {
+  color: inherit;
+}
+html.light .intro-loader-container .intro-loader-letter {
+  -webkit-text-fill-color: transparent !important;
 }
 
 

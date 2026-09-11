@@ -13,8 +13,32 @@ export const projects: Project[] = [
   },
   {
     id: '2',
+    title: 'Expensio',
+    description: 'A mobile-first personal money OS built for simple everyday finance management. Expensio brings spending, budgets, goals, and debt tracking into a single fast PWA, backed by an offline-first architecture with local persistence, background synchronization, and monthly financial insights.',
+    technologies: [
+      'React',
+      'Fastify',
+      'TypeScript',
+      'PostgreSQL',
+      'Drizzle ORM',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Dexie.js',
+      'Offline-First',
+      'JWT',
+      'Docker',
+      'Turborepo'
+    ],
+    category: 'fullstack',
+    imageUrl: '/images/expensio.png',
+    imagePosition: 'center 15%', // Centers horizontally, shifts down to show phone tops
+    liveUrl: 'https://expensio-flax.vercel.app/welcome',
+    githubUrl: 'https://github.com/minhajbinhafsahnazer/expensio',
+  },
+  {
+    id: '3',
     title: 'Plant Pot',
-    description: 'Interactive dashboard with real-time data visualization using Chart.js and WebSocket connections.',
+    description: 'An e-commerce platform designed for selling designer carpets and home essentials. Features a modern storefront and a seamless shopping experience.',
     technologies: ['Next.js', 'TypeScript', 'Chart.js', 'Django', 'Redis', 'AWS', 'chat bot'],
     category: 'fullstack',
     imageUrl: '/images/plant_pot.png',

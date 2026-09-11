@@ -3,3 +3,4 @@
 
 export { default as GlassCard } from './GlassCard';
 export { default as Section } from './Section';
+export { default as IntroLoader } from './IntroLoader';

@@ -17,7 +17,9 @@ export default function FeaturedWork() {
       setLoading(true);
       try {
         const apiProjects = await getProjects();
-        setProjects(apiProjects);
+        if (apiProjects && apiProjects.length > 0) {
+          setProjects(apiProjects);
+        }
       } catch (error) {
         console.log('API not available, using static data');
       } finally {
@@ -43,7 +45,7 @@ export default function FeaturedWork() {
         </RevealOnScroll>
       </div>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-stretch">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
         {(projects || fallbackProjects).map((project, index) => (
           <RevealOnScroll key={project.id} delay={index * 0.15} direction={index % 2 === 0 ? 'left' : 'right'} className="h-full">
             <GlassCard 
@@ -63,13 +65,14 @@ export default function FeaturedWork() {
               )}
 
               {/* Project Image/Gradient */}
-              <div className="h-52 w-full relative overflow-hidden bg-zinc-900/50 shrink-0">
+              <div className="h-44 w-full relative overflow-hidden bg-zinc-900/50 shrink-0">
                 {project.imageUrl ? (
                   <Image
                     src={project.imageUrl}
                     alt={`${project.title} preview`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={{ objectPosition: project.imagePosition || 'center' }}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
@@ -88,9 +91,9 @@ export default function FeaturedWork() {
               </div>
 
               {/* Project Content */}
-              <div className="p-7 flex flex-col flex-grow">
-                <div className="mb-3 flex items-center justify-between">
-                  <h4 className="font-serif-display text-xl font-normal group-hover:text-blue-400 dark:group-hover:text-blue-400 transition-colors duration-500">
+              <div className="p-5 flex flex-col flex-grow">
+                <div className="mb-2.5 flex items-center justify-between">
+                  <h4 className="font-serif-display text-lg font-normal group-hover:text-blue-400 dark:group-hover:text-blue-400 transition-colors duration-500">
                     {project.title}
                   </h4>
                   <span className="text-[9px] font-medium text-zinc-500 uppercase tracking-[0.15em]">
@@ -98,22 +101,22 @@ export default function FeaturedWork() {
                   </span>
                 </div>
 
-                <p className="mb-6 text-xs leading-relaxed line-clamp-2">
+                <p className="mb-4 text-[11px] sm:text-xs leading-relaxed line-clamp-2 text-zinc-400">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
-                <div className="mb-6 flex flex-wrap gap-1.5">
+                <div className="mb-4 flex flex-wrap gap-1.5">
                   {project.technologies.slice(0, 4).map((tech) => (
-                    <span key={tech} className="text-[10px] px-2.5 py-0.5 rounded-full bg-zinc-900/5 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 dark:text-zinc-400 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/20 hover:text-blue-600 dark:hover:text-blue-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(59,130,246,0.15)] cursor-default">
+                    <span key={tech} className="text-[9px] px-2 py-0.5 rounded-full bg-zinc-900/5 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 dark:text-zinc-400 transition-all duration-300 hover:bg-blue-500/10 hover:border-blue-500/20 hover:text-blue-600 dark:hover:text-blue-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(59,130,246,0.15)] cursor-default">
                       {tech}
                     </span>
                   ))}
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-6 mt-auto">
-                  {project.liveUrl && (
+                <div className="flex gap-5 mt-auto">
+                  {project.liveUrl && project.liveUrl !== '#' && (
                     <a 
                       href={project.liveUrl} 
                       target="_blank" 
@@ -128,7 +131,7 @@ export default function FeaturedWork() {
                       href={project.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="group/link flex items-center gap-2 text-xs font-medium text-zinc-400 hover:text-zinc-300 transition-colors duration-300 relative z-20"
+                      className="group/link flex items-center gap-1.5 text-[11px] font-medium text-zinc-400 hover:text-zinc-300 transition-colors duration-300 relative z-20"
                     >
                       GitHub 
                       <span className="group-hover/link:translate-x-1 transition-transform duration-300">&rarr;</span>

@@ -11,32 +11,20 @@ import SkillsSection from './components/sections/SkillsSection';
 import GlassCard from './components/ui/GlassCard';
 import ThemeToggle from './components/ui/ThemeToggle';
 
+import IntroLoader from './components/ui/IntroLoader';
+
 const useSafeLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [introPhase, setIntroPhase] = useState<'playing' | 'exiting' | 'done'>('playing');
+  const [introPhase, setIntroPhase] = useState<'playing' | 'done'>('playing');
 
-  // Prevent flash by setting done state synchronously on mount if already played
+  // Check if intro has already been shown in this session
   useSafeLayoutEffect(() => {
     const hasPlayed = sessionStorage.getItem('introPlayed');
     if (hasPlayed === 'true') {
       setIntroPhase('done');
     }
-  }, []);
-
-  useEffect(() => {
-    if (sessionStorage.getItem('introPlayed') === 'true') {
-      return;
-    }
-    // Phase 1: play intro for 2.2s, then start exit
-    const exitTimer = setTimeout(() => setIntroPhase('exiting'), 2200);
-    // Phase 2: remove overlay after exit animation (0.8s)
-    const doneTimer = setTimeout(() => {
-      setIntroPhase('done');
-      sessionStorage.setItem('introPlayed', 'true');
-    }, 3000);
-    return () => { clearTimeout(exitTimer); clearTimeout(doneTimer); };
   }, []);
 
   useEffect(() => {
@@ -73,39 +61,14 @@ export default function Home() {
     <div className="relative min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 noise-overlay page-root">
       <ThemeToggle />
 
-      {/* ── Intro Overlay ── */}
+      {/* ── World-class Cinematic Intro Loader ── */}
       {introPhase !== 'done' && (
-        <div
-          className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-950 transition-all duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] ${
-            introPhase === 'exiting' ? 'opacity-0 -translate-y-10 scale-[1.02]' : 'opacity-100'
-          }`}
-        >
-          {/* Ambient glow */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/[0.04] blur-[120px] intro-glow" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-purple-500/[0.06] blur-[80px] intro-glow-delayed" />
-          </div>
-
-          {/* Horizontal line sweep */}
-          <div className="absolute top-1/2 left-0 w-full h-px intro-line-sweep">
-            <div className="h-full bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
-          </div>
-
-          {/* Name */}
-          <h1 className="relative font-serif-display text-5xl md:text-7xl font-light tracking-[-0.04em] text-zinc-900 dark:text-white intro-name">
-            MINHAJ
-          </h1>
-
-          {/* Tagline */}
-          <p className="relative mt-4 text-[11px] md:text-xs uppercase tracking-[0.35em] text-zinc-500 font-medium intro-tagline">
-            Full Stack Developer
-          </p>
-
-          {/* Thin progress bar */}
-          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-32 h-[2px] rounded-full bg-white/5 overflow-hidden">
-            <div className="h-full bg-blue-500/60 rounded-full intro-progress" />
-          </div>
-        </div>
+        <IntroLoader
+          onComplete={() => {
+            setIntroPhase('done');
+            sessionStorage.setItem('introPlayed', 'true');
+          }}
+        />
       )}
       {/* Animated gradient background */}
       <div className="mesh-gradient" />
@@ -132,7 +95,7 @@ export default function Home() {
               <h2 className="text-sm font-bold tracking-tighter text-zinc-900 dark:text-white font-serif-display text-lg">
                 MINHAJ
               </h2>
-              <div className="flex gap-10 items-center">
+              <div className="hidden md:flex gap-10 items-center">
                 {['About', 'Work', 'Experience', 'Skills', 'Contact'].map((item) => (
                   <a 
                     key={item}
@@ -147,6 +110,16 @@ export default function Home() {
                   href="/MINHAJ.pdf"
                   download
                   className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 hover:border-blue-400/40 transition-all"
+                >
+                  Resume
+                </a>
+              </div>
+              {/* Mobile Resume Button (Links hidden on mobile) */}
+              <div className="md:hidden flex items-center">
+                <a
+                  href="/MINHAJ.pdf"
+                  download
+                  className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 transition-all"
                 >
                   Resume
                 </a>

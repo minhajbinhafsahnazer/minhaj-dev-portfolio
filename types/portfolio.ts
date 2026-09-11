@@ -7,6 +7,7 @@ export interface Project {
   description: string;
   technologies: string[];
   imageUrl?: string;
+  imagePosition?: string;
   liveUrl?: string;
   githubUrl?: string;
   category: 'fullstack' | 'frontend' | 'backend' | 'devops';
