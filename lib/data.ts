@@ -13,8 +13,8 @@ export const projects: Project[] = [
   },
   {
     id: '2',
-    title: 'Expensio',
-    description: 'A mobile-first personal money OS built for simple everyday finance management. Expensio brings spending, budgets, goals, and debt tracking into a single fast PWA, backed by an offline-first architecture with local persistence, background synchronization, and monthly financial insights.',
+    title: 'Wazn',
+    description: 'A mobile-first personal money OS built for simple everyday finance management. Wazn brings spending, budgets, goals, and debt tracking into a single fast PWA, backed by an offline-first architecture with local persistence, background synchronization, and monthly financial insights.',
     technologies: [
       'React',
       'Fastify',
@@ -63,7 +63,7 @@ export const experiences: Experience[] = [
     company: 'Harwex Technologies',
     period: '2022 - 2024',
     description: 'Worked on Payment Gateway Orchestration System, developed REST APIs and frontend interfaces, implemented authentication systems and database optimization.',
-    technologies: ['React', 'Django', 'PostgreSQL', 'AWS', 'FastAPI', 'Celery', 'Redis', 'Git', 'Docker', 'Bootstrap',  'API Integrations', 'Postman'],
+    technologies: ['React', 'Django', 'PostgreSQL', 'AWS', 'FastAPI', 'Celery', 'Redis', 'Git', 'Docker', 'Bootstrap', 'API Integrations', 'Postman'],
     type: 'work',
   },
   // Add more experiences
@@ -81,7 +81,7 @@ export const technologies: Technology[] = [
   { name: 'GSAP', category: 'frontend' },
   { name: 'Figma', category: 'frontend' },
   { name: 'jQuery', category: 'frontend' },
-  
+
   // Backend & Databases
   { name: 'Django', category: 'backend' },
   { name: 'Flask', category: 'backend' },
@@ -92,7 +92,7 @@ export const technologies: Technology[] = [
   { name: 'MySQL', category: 'backend' },
   { name: 'PostgreSQL', category: 'backend' },
   { name: 'MongoDB', category: 'backend' },
-  
+
   // Cloud & DevOps
   { name: 'AWS (EC2/ECS/S3)', category: 'cloud' },
   { name: 'Vercel', category: 'cloud' },
