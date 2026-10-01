@@ -30,7 +30,7 @@ export const projects: Project[] = [
       'Turborepo'
     ],
     category: 'fullstack',
-    imageUrl: '/images/expensio.png',
+    imageUrl: '/images/wazn_on_table1.png',
     imagePosition: 'center 15%', // Centers horizontally, shifts down to show phone tops
     liveUrl: 'https://expensio-flax.vercel.app/welcome',
     githubUrl: 'https://github.com/minhajbinhafsahnazer/expensio',
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     description: 'An e-commerce platform designed for selling designer carpets and home essentials. Features a modern storefront and a seamless shopping experience.',
     technologies: ['Next.js', 'TypeScript', 'Chart.js', 'Django', 'Redis', 'AWS', 'chat bot'],
     category: 'fullstack',
-    imageUrl: '/images/plant_pot.png',
+    imageUrl: '/images/plant_pot_lap.png',
     liveUrl: '#',
   },
   // Add more projects
