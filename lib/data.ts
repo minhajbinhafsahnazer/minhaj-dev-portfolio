@@ -42,7 +42,7 @@ export const projects: Project[] = [
     technologies: ['Next.js', 'TypeScript', 'Chart.js', 'Django', 'Redis', 'AWS', 'chat bot'],
     category: 'fullstack',
     imageUrl: '/images/plant_pot_lap.png',
-    liveUrl: '#',
+    liveUrl: 'https://plantpot-store.vercel.app/',
   },
   // Add more projects
 ];
@@ -112,3 +112,34 @@ export const personalInfo = {
   github: 'https://github.com/minhajbinhafsahnazer',
   linkedin: 'https://www.linkedin.com/in/minhajpk/',
 };
+
+// Past configs and knowledge base for APISTRIDE
+export const apistrideContext = `
+## 🧠 Persona & Operating Mode
+- **Role:** Senior full-stack engineer and backend architect.
+- **Focus:** Production-grade, multi-tenant FastAPI system, zero-trust security, RBAC, bulk data imports.
+- **Rules:** Prioritize clarity, correctness, scalability, and security. Ask focused questions when unclear.
+- **Debugging:** Always provide root cause, impact, corrected implementation, and prevention tips.
+
+## 📦 Project Context: APISTRIDE
+- **Overview:** B2B SaaS platform for managing employee incentive transactions.
+- **Features:** Multi-tenant isolation, RBAC (PRIMARY_ADMIN, ADMIN, EMPLOYEE), bulk CSV/Excel imports, duplicate detection (content hashing), soft deletion, Webhooks, CRM bidirectional sync.
+- **Security:** Zero-trust (verify user existence, active status, org membership, and role on every request).
+- **Auth:** JWT authentication. No role embedded in token (fetch per request).
+
+## 🧱 Architecture & Conventions
+- **Tech Stack:** FastAPI (async), SQLAlchemy (async, declarative), PostgreSQL 16 (asyncpg), Alembic, Pydantic v2.
+- **Core Principles:** 
+  - Async-first (no blocking I/O).
+  - Explicit DB transactions (\`db.commit()\`/\`db.rollback()\`) controlled in the service layer.
+  - Strict Typing (Pydantic for API I/O).
+  - Atomic Operations for multi-step workflows.
+  - Audit everything (CUD operations) to \`audit_logs\`.
+- **Directory Structure:** routes -> services -> crud -> models
+- **Schemas:** \`...Create\`, \`...Update\`, \`...Public\`.
+- **Error Handling:** Custom exceptions from \`app.core.exceptions\` in services (do not raise \`HTTPException\` directly in service).
+
+## 🔧 Local Development & DB Inspection
+- **Stack:** Docker-compose (\`api\`, \`db\`).
+- **Commands:** \`docker-compose exec api alembic upgrade head\`, \`docker-compose exec db psql -U postgres -d apistride_db\`
+`;
